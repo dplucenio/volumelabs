@@ -1,0 +1,7 @@
+#!/bin/bash
+
+minikube start -p volumelabs --memory 4Gi
+eval $(minikube -p volumelabs docker-env)
+docker build . -f speaker/Dockerfile -t dplucenio/speaker
+docker build . -f reader/Dockerfile -t dplucenio/reader
+kubectl apply -f resources.yaml

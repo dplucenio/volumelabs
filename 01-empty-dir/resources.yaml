@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: volumelabs
+spec:
+  replicas: 1
+  selector:
+    app: volumelabs
+  template:
+    metadata:
+      name: volumelabs
+      labels:
+        app: volumelabs
+    spec:
+      containers:
+        - name: speaker
+          image: dplucenio/speaker
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - mountPath: /files/
+              name: logs
+        - name: reader
+          image: dplucenio/reader
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - mountPath: /files/
+              name: logs
+      volumes:
+        - name: logs
+          emptyDir: {}
+
