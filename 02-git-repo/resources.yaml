@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: meta-thing
+  labels:
+    name: meta-thing
+spec:
+  containers:
+  - name: meta-thing
+    image: dplucenio/meta-thing
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+  volumes:
+    - name: meta-volume
+      gitRepo:
+        repository: https://github.com/dplucenio/volumelabs
+        directory: '02-git-repo'
+
+
